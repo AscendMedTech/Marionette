@@ -39,6 +39,7 @@ void StepperMotor::step(int steps){
 }
 
 StepperMotor motor = StepperMotor(2,3);
+StepperMotor motor2 = StepperMotor(4,5);
 
 void setup() {
   // put your setup code here, to run once:
@@ -66,7 +67,9 @@ void getSerial(){
     //Serial.println(intMessage);
     float rotations = intMessage / distancePerRotation;
     float steps = rotations * 3200;
-    motor.step(steps); 
+    motor.step(steps);
+    motor2.step(steps);
+     
     //step(3200);  
   }
 }
