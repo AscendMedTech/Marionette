@@ -1,6 +1,8 @@
 from Comm import Comm
 from inputs import get_gamepad
 from inputs import get_key
+import serial
+#test = serial.Serial('COM11', 9600, timeout = 1)
 
 ser = Comm('COM10', 9600)
 
