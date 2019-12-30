@@ -1,9 +1,9 @@
 from inputs import get_gamepad
 from Comm import Comm
 
+
 x, y = 0, 0
 ser = Comm('COM1', 9600) #the comm port is 100% wrong. Check it and change it.
-
 
 try:
     get_gamepad()
