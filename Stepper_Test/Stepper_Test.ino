@@ -5,7 +5,8 @@
 float distancePerRotation = 0.393196481;
 uint16_t message = 0;
 String message1 = "";
-float intMessage = 0;
+float floatXDistance = 0;
+float floatYDistance = 0;
 
 class StepperMotor{
   public:
@@ -61,14 +62,21 @@ void getSerial(){
   if(Serial.available() > 0){
     //message = Serial.read() << 8;
     message1 = Serial.readString();
-    intMessage = message1.toFloat();
-    Serial.println(intMessage);
+    int index = message1.indexOf(",");
+    String xDistance = message1.substring(0, index);
+    String yDistance = message1.substring(index+1, message1.length()-1);
+    floatXDistance = xDistance.toFloat();
+    floatYDistance = yDistance.toFloat();
+    Serial.println(floatXDistance);
+    Serial.println(floatYDistance);
     //Serial.print("Message Recieved");
     //Serial.println(intMessage);
-    float rotations = intMessage / distancePerRotation;
-    float steps = rotations * 3200;
-    motor.step(steps);
-    motor2.step(steps);
+    float rotationsX = floatXDistance / distancePerRotation;
+    float rotationsY = floatYDistance / distancePerRotation;
+    float stepsX = rotationsX * 3200;
+    float stepsY = rotationsY * 3200;
+    motor.step(stepsX);
+    motor2.step(stepsY);
      
     //step(3200);  
   }
