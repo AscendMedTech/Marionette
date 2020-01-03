@@ -1,0 +1,36 @@
+#include <Arduino.h>
+#include "Catheter.h"
+//#include "Stepper.h"
+
+using namespace Catheter;
+using StepperMotor::Stepper;
+
+FourPull::FourPull(char xdir, char xstp, char ydir, char ystp){
+    xStepper = Stepper(xdir, xstp);
+    yStepper = Stepper(ydir, ystp);
+}
+
+void FourPull::move(int stepsX, int stepsY){
+    float ratio;
+    if(stepsX > stepsY){
+        ratio = stepsX/stepsY;
+        for (int i = 0; i < stepsY; i++){
+            xStepper.step(ratio);
+            yStepper.step(1);
+        }
+    }
+    else if (stepsX < stepsY){
+        ratio = stepsY/stepsX;
+        for (int i = 0; i < stepsX; i++){
+            yStepper.step(ratio);
+            xStepper.step(1);
+        }
+    }
+    else if (stepsX == stepsY){
+        ratio = 1;
+        for (int i = 0; i < stepsX; i++){
+            xStepper.step(1);
+            yStepper.step(1);
+        }
+    }
+}

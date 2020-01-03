@@ -1,0 +1,13 @@
+#include "Stepper.h"
+
+namespace Catheter{
+    class FourPull{
+        private:
+            StepperMotor::Stepper xStepper;
+            StepperMotor::Stepper yStepper;
+        
+        public:
+            FourPull(char, char, char, char);
+            void move(int,int);
+    };
+}

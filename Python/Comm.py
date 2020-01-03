@@ -1,8 +1,9 @@
 import serial
 
+
 class Comm:
     def __init__(self, comm_port, baud_rate):
-        self.comm = serial.Serial(comm_port, baud_rate, timeout = 1)
+        self.comm = serial.Serial(comm_port, baud_rate, timeout=1)
         return
 
     def close_serial(self):
@@ -20,7 +21,8 @@ class Comm:
         return
 
     def send_length(self, x, y):
-        msg = '\r\n' + x + ',' + y
+        msg = '\r\n' + str(x) + ',' + str(y)
         print(msg)
         self.comm.write(msg.encode())
+        print(self.comm.readline().decode().strip())
         return
