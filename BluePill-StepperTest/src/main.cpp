@@ -1,17 +1,12 @@
 #include <Arduino.h>
 #include "Stepper.h"
-//#include "Catheter.h"
+#include "Catheter.h"
 
-#ifndef ledPin
-  #define ledPin(pin) (pin) //13
-#endif
 
 using StepperMotor::Stepper;
-//using Catheter::FourPull;
+using Catheter::FourPull;
 
 float distancePerRotation = 0.9738929;
-
-char ledPinChar = PC13;
 
 char xAxisDir = PB12;
 char xAxisStep = PB13;
@@ -21,7 +16,7 @@ char yAxisStep = PB15;
 Stepper xAxisStepper(xAxisDir, xAxisStep);
 Stepper yAxisStepper(yAxisDir, yAxisStep);
 
-//FourPull fourPull1(xAxisDir,xAxisStep, yAxisDir, yAxisStep);
+FourPull fourPull1(xAxisStepper, yAxisStepper);
 
 //Get the length of string that you want to reel in inches from the serial
 //Format is x,y decimals are accepted
@@ -66,7 +61,6 @@ float getStepsY(String input){
 }
 
 void setup() {
-  pinMode(ledPin(PC13),OUTPUT);
   Serial.begin(9600);
   Serial.println("setup");
 }
@@ -74,8 +68,8 @@ void setup() {
 void loop() {
   if (Serial.available() > 0){
     String inputString = getInputString();
-    xAxisStepper.step(getStepsX(inputString));
-    yAxisStepper.step(getStepsY(inputString));
-    //fourPull1.move(getStepsX(inputString),getStepsY(inputString));
+    //xAxisStepper.step(getStepsX(inputString));
+    //yAxisStepper.step(getStepsY(inputString));
+    fourPull1.move(getStepsX(inputString),getStepsY(inputString));
   }
 }

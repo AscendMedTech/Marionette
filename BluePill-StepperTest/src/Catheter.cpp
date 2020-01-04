@@ -1,13 +1,21 @@
 #include <Arduino.h>
 #include "Catheter.h"
-//#include "Stepper.h"
 
 using namespace Catheter;
-using StepperMotor::Stepper;
 
-FourPull::FourPull(char xdir, char xstp, char ydir, char ystp){
-    xStepper = Stepper(xdir, xstp);
-    yStepper = Stepper(ydir, ystp);
+StepperMotor::Stepper xStepper;
+StepperMotor::Stepper yStepper;
+
+/*FourPull::FourPull(char xdir, char xstp, char ydir, char ystp){
+    xDir = xdir;
+    xStp = xstp;
+    yDir = ydir;
+    yStp = ystp;
+}*/
+
+FourPull::FourPull(StepperMotor::Stepper x, StepperMotor::Stepper y){
+    xStepper = x;
+    yStepper = y;
 }
 
 void FourPull::move(int stepsX, int stepsY){

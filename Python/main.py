@@ -4,7 +4,7 @@ from inputs import get_key
 import serial
 #test = serial.Serial('COM11', 9600, timeout = 1)
 
-ser = Comm('/dev/ttyACM0', 9600)
+ser = Comm('/dev/ttyUSB1', 9600)
 
 
 def main():

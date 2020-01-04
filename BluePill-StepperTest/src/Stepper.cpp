@@ -9,6 +9,8 @@ using namespace StepperMotor;
 
 int stepsPassed = 0;
 
+Stepper::Stepper(){}
+
 Stepper::Stepper(char dirPin, char stpPin){
     dirPinChar = dirPin;
     stpPinChar = stpPin;
