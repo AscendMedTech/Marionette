@@ -12,7 +12,7 @@ namespace Catheter{
             char xDir, xStp,yDir, yStp;
             //FourPull(char, char, char, char);
             FourPull(StepperMotor::Stepper, StepperMotor::Stepper);
-            void move(int,int);
+            void move(float,float);
     };
 }
 

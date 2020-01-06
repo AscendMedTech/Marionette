@@ -28,6 +28,10 @@ String getInputString(){
   return input;
 }
 
+void requestInputString(){
+  Serial.println("send");
+}
+
 float getStepsX(String input){
   int index = input.indexOf(",");
   String xDistance = input.substring(0, index);
@@ -62,7 +66,8 @@ float getStepsY(String input){
 
 void setup() {
   Serial.begin(9600);
-  Serial.println("setup");
+  Serial.println("setup catheter");
+  requestInputString();
 }
 
 void loop() {
@@ -71,5 +76,6 @@ void loop() {
     //xAxisStepper.step(getStepsX(inputString));
     //yAxisStepper.step(getStepsY(inputString));
     fourPull1.move(getStepsX(inputString),getStepsY(inputString));
+    requestInputString();
   }
 }
