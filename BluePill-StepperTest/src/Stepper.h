@@ -5,6 +5,7 @@ namespace StepperMotor{
         private:
             char dirPinChar;
             char stpPinChar;
+            int stepsPassed;
 
         public:
             Stepper();

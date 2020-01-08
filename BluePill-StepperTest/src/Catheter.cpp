@@ -3,9 +3,6 @@
 
 using namespace Catheter;
 
-StepperMotor::Stepper xStepper;
-StepperMotor::Stepper yStepper;
-
 /*FourPull::FourPull(char xdir, char xstp, char ydir, char ystp){
     xDir = xdir;
     xStp = xstp;

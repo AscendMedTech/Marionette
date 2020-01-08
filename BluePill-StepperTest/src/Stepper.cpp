@@ -7,8 +7,6 @@ using namespace StepperMotor;
 #define STEP_PIN(pin) (pin)
 #define LED_PIN PC13
 
-int stepsPassed = 0;
-
 Stepper::Stepper(){}
 
 Stepper::Stepper(char dirPin, char stpPin){

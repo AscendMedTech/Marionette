@@ -61,7 +61,7 @@ float getStepsX(String input){
 
   float rotationsX = xDistanceFloat / distancePerRotation;
 
-  float stepsX = rotationsX * 4096;
+  float stepsX = rotationsX * 1600;
 
   Serial.println("x steps calculated:");
   Serial.println(stepsX);
@@ -77,7 +77,7 @@ float getStepsY(String input){
 
   float rotationsY = yDistanceFloat / distancePerRotation;
 
-  float stepsY = rotationsY * 4096;
+  float stepsY = rotationsY * 1600;
 
   Serial.println("y steps calculated:");
   Serial.println(stepsY);
@@ -119,6 +119,13 @@ void loop() {
     //yAxisStepper.step(getStepsY(inputString));
     fourPull1.move(getStepsX(inputString),getStepsY(inputString));
     //fourPull1.move(getXSplit(inputString),getYSplit(inputString));
-    requestInputString();
+    //requestInputString();
   }
+  String stepDataPrefix = "xy,";
+  stepDataPrefix += fourPull1.xStepper.getStepsPassed();
+  String stepDataSuffix = ",";
+  stepDataSuffix += fourPull1.yStepper.getStepsPassed();
+  String stepData = "";
+  stepData += stepDataPrefix + stepDataSuffix;
+  Serial.println(stepData);
 }
