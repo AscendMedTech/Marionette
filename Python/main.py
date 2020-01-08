@@ -2,9 +2,10 @@ from Comm import Comm
 from inputs import get_gamepad
 from inputs import get_key
 import serial
+import time
 #test = serial.Serial('COM11', 9600, timeout = 1)
 
-ser = Comm('/dev/ttyUSB1', 9600)
+ser = Comm('/dev/ttyUSB0', 9600)
 
 
 def main():
@@ -16,34 +17,44 @@ def main():
         controller = False
     x, y = 0, 0
     while True:
-        x2, y2 = x, y
         if controller == True:
             x, y = getController(x, y)
+            #time.sleep(5)
+            break
         else:
-            x, y = getKeyboard(x, y)
-        if x2 != x or y2 != y:
-            ser.send_length(x, y)
+            if ser.recieve_send_command_bool():
+                while x == 0 and y == 0:
+                    x, y = getKeyboard(x, y)
+                print(x, y)
+                ser.send_length(x, y)
+        '''if x2 != x or y2 != y:
+            if ser.recieve_send_command_bool():
+            ser.send_length(x, y)'''
+
     return
 
 
-def getController(x, y):
+def getControllerX():
     events = get_gamepad()
     for event in events:
         if event.code == 'ABS_X':
-            x = round(event.state / 32768, 2)
-            if -0.15 < x < 0.15:
-                x = 0
-        elif event.code == 'ABS_Y':
-            y = round(event.state / 32768, 2)
-            if -0.15 < y < 0.15:
-                y = 0
-    return x, y
+            return event.state
+
+
+def getControllerY():
+    events = get_gamepad()
+    for event in events:
+        if event.code == 'ABS_Y':
+            return event.state
 
 
 def getKeyboard(x, y):
+    x, y = 0, 0
     keyboardEvents = get_key()
+
     for event in keyboardEvents:
-        if event.state == 1:
+        #print(event.ev_type, event.code, event.state)
+        if event.state == 1 or event.state == 2:
             if event.code == 'KEY_W':
                 x = 0.1
             elif event.code == 'KEY_S':

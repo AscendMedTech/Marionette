@@ -20,9 +20,22 @@ class Comm:
         self.comm.write(msg.encode())
         return
 
+    def read(self):
+        msg = ''
+        msg = self.comm.readline().decode().strip()
+        print(msg)
+
     def send_length(self, x, y):
-        msg = '\r\n' + str(x) + ',' + str(y)
+        msg = str(x) + ',' + str(y) + '\n'
         print(msg)
         self.comm.write(msg.encode())
-        print(self.comm.readline().decode().strip())
         return
+
+    def recieve_send_command_bool(self):
+        msg = ''
+        #while msg == '':
+        msg = self.comm.readline().decode().strip()
+        print(msg)
+        if msg == "send":
+            return True
+        return False

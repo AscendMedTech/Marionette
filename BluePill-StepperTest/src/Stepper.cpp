@@ -21,21 +21,28 @@ Stepper::Stepper(char dirPin, char stpPin){
 
 void Stepper::step(float steps){
   digitalWrite(STEP_PIN(stpPinChar), LOW);
-  //digitalWrite(DIRECTION_PIN, LOW);
+  bool isPositive = true;
   if (steps >= 0.0){
     digitalWrite(DIRECTION_PIN(dirPinChar), LOW);
+    isPositive = true;
   }
   else if(steps < 0.0){
     digitalWrite(DIRECTION_PIN(dirPinChar), HIGH);
+    isPositive = false;
   }
   for(int i = 1; i <= abs(steps); i ++){
     digitalWrite(STEP_PIN(stpPinChar), HIGH);
     digitalWrite(LED_PIN, HIGH);
-    delayMicroseconds(30);
+    delayMicroseconds(1000);
     digitalWrite(STEP_PIN(stpPinChar), LOW);
-    digitalWrite(LED_PIN, HIGH);
-    delayMicroseconds(30);
-    stepsPassed++;
+    digitalWrite(LED_PIN, LOW);
+    delayMicroseconds(1000);
+    if(isPositive){
+      stepsPassed++;
+    }
+    else if(!isPositive){
+      stepsPassed--;
+    }
   }
 }
 
