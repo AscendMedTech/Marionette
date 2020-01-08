@@ -10,7 +10,7 @@ ser = Comm('/dev/ttyUSB0', 9600)
 
 def main():
     controller = True
-    try:
+    try: # detects if a game controller is connected
         events = get_gamepad()
     except:
         print("No game controller found. Using keyboard.")
