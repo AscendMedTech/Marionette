@@ -3,19 +3,20 @@
 
 #include "Stepper.h"
 
-namespace Catheter{
-    class FourPull{
-        private:
-            //char xDir, xStp, yDir, yStp;
-            
-        public:
-            char xDir, xStp,yDir, yStp;
-            StepperMotor::Stepper xStepper;
-            StepperMotor::Stepper yStepper;
-            //FourPull(char, char, char, char);
-            FourPull(StepperMotor::Stepper, StepperMotor::Stepper);
-            void move(float,float);
-    };
-}
+namespace Catheter
+{
+class FourPull
+{
+private:
+
+public:
+    char xDir, xStp, yDir, yStp;
+    StepperMotor::Stepper xStepper;
+    StepperMotor::Stepper yStepper;
+    FourPull();
+    FourPull(StepperMotor::Stepper, StepperMotor::Stepper);
+    void move(float, float);
+};
+} // namespace Catheter
 
 #endif
