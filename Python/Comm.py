@@ -45,6 +45,7 @@ class Comm:
 
     ''' Gets the number of steps the stepper motors has turned and 
     converts that into inches of string pulled'''
+
     def recieve_steps(self):
         msg = ''
         # 0.9738929 inches reeled in/out per revolution
@@ -56,7 +57,8 @@ class Comm:
         msg = msg.split(',')
         if msg[0] != 'xy':
             return None
-        xSteps,ySteps = msg[1:3] # get index 1 and 2 of the list
+        xSteps, ySteps = msg[1:3]  # get index 1 and 2 of the list
         # 1600 steps in a revolution
-        xInch,yInch = (int(x)*step_ratio)/1600, (int(y)*step_ratio)/1600
+        xInch, yInch = round((int(xSteps) * step_ratio) / 1600, 3), round(
+            (int(ySteps) * step_ratio) / 1600, 3)
         return [int(xSteps), int(ySteps), xInch, yInch]
