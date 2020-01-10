@@ -4,8 +4,10 @@
 using namespace AscendSerial;
 using StepperMotor::Stepper;
 
+//Default constructor
 CatheterSerial::CatheterSerial() {}
 
+//Constructor with FourPull argument to specify which catheter's data will be sent.
 CatheterSerial::CatheterSerial(FourPull catheter)
 {
     activeCatheter = catheter;
@@ -28,6 +30,9 @@ String CatheterSerial::getInputString()
     return input;
 }
 
+//Sends the number of steps the catheter has traveled in both the x and y direction.
+//Format: xy,int,int
+//TODO: JSON?
 void CatheterSerial::sendStepsPassed()
 {
     String stepDataPrefix = "xy,";

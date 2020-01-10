@@ -3,14 +3,18 @@
 
 using namespace Catheter;
 
+//Default constructor
 FourPull::FourPull() {}
 
+//Constructor with arguments for stepper motors. Must use this one to actually use FourPull class.
 FourPull::FourPull(StepperMotor::Stepper x, StepperMotor::Stepper y)
 {
     xStepper = x;
     yStepper = y;
 }
 
+//Move FourPull Catheter x and y steps at the same time by alternating
+//the steppers at a minuimum of one step per stepper.
 void FourPull::move(float stepsX, float stepsY)
 {
     float ratio;

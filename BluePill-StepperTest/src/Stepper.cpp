@@ -7,10 +7,12 @@ using namespace StepperMotor;
 #define STEP_PIN(pin) (pin)
 #define LED_PIN PC13
 
+//Default constructor
 Stepper::Stepper()
 {
 }
 
+//Constuctor with pin arguments
 Stepper::Stepper(char dirPin, char stpPin)
 {
   dirPinChar = dirPin;
@@ -20,6 +22,7 @@ Stepper::Stepper(char dirPin, char stpPin)
   pinMode(LED_PIN, OUTPUT);
 }
 
+//Move stepper motor steps number of steps
 void Stepper::step(float steps)
 {
   digitalWrite(STEP_PIN(stpPinChar), LOW);
@@ -53,11 +56,14 @@ void Stepper::step(float steps)
   }
 }
 
+//Returns the number of steps stepper motor has moved.
+//Takes direction into account
 int Stepper::getStepsPassed()
 {
   return stepsPassed;
 }
 
+//Resets the counter for number of steps passed.
 void Stepper::resetStepsPassed()
 {
   stepsPassed = 0;
